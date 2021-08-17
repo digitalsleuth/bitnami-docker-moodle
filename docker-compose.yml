@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.5
@@ -9,12 +9,12 @@ services:
       - MARIADB_CHARACTER_SET=utf8mb4
       - MARIADB_COLLATE=utf8mb4_unicode_ci
     volumes:
-      - 'mariadb_data:/bitnami/mariadb'
+      - /xxxx/mariadb_data:/bitnami/mariadb
   moodle:
     image: docker.io/bitnami/moodle:3
     ports:
-      - '80:8080'
-      - '443:8443'
+      - 80:8080
+      - 443:8443
     environment:
       - MOODLE_DATABASE_HOST=mariadb
       - MOODLE_DATABASE_PORT_NUMBER=3306
@@ -22,14 +22,7 @@ services:
       - MOODLE_DATABASE_NAME=bitnami_moodle
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - 'moodle_data:/bitnami/moodle'
-      - 'moodledata_data:/bitnami/moodledata'
+      - /xxxx/moodle_data:/bitnami/moodle
+      - /xxxx/moodledata_data:/bitnami/moodledata
     depends_on:
       - mariadb
-volumes:
-  mariadb_data:
-    driver: local
-  moodle_data:
-    driver: local
-  moodledata_data:
-    driver: local
